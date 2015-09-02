@@ -24,6 +24,10 @@ hr.light {
     border-color: #fff;
 }
 
+hr.yellow {
+    border-color: #f3ac00;
+}
+
 a {
     color: #f05f40;
     -webkit-transition: all .35s;
