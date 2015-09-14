@@ -4,21 +4,21 @@
 
 // set the stage
 var margin = {t:30, r:20, b:20, l:40 },
-    w = 900 - margin.l - margin.r,
+    w1 = 500 - margin.l - margin.r,
     h = 500 - margin.t - margin.b,
-    x = d3.scale.linear().range([0, w]),
+    x1 = d3.scale.linear().range([0, w1]),
     y = d3.scale.linear().range([h - 60, 0]),
 
 //colors that will reflect geographical regions
-    color = d3.scale.category10();
+    color1 = d3.scale.category10();
 
 var people = d3.select("#chart").append("svg")
-    .attr("width", w + margin.l + margin.r)
+    .attr("width", w1 + margin.l + margin.r)
     .attr("height", h + margin.t + margin.b);
 
 // set axes, as well as details on their ticks
-var xAxis = d3.svg.axis()
-    .scale(x)
+var xAxis1 = d3.svg.axis()
+    .scale(x1)
     .ticks(20)
     .tickSubdivide(true)
     .tickSize(6, 3, 0)
@@ -46,7 +46,7 @@ d3.csv("peopleversuscritic.csv", function(data) {
 
 
     var x2 = Math.max(-d3.min(data, function(d) { return d.movieRating; }), d3.max(data, function(d) { return d.movieRating; }));
-    x.domain([4, 10]);
+    x1.domain([4, 10]);
     y.domain([4, 10])
 
     // style the circles, set their locations based on data
@@ -56,12 +56,12 @@ d3.csv("peopleversuscritic.csv", function(data) {
             .enter().append("circle")
             .attr("class", "circles")
             .attr({
-                cx: function(d) { return x(+d.movieRating); },
+                cx: function(d) { return x1(+d.movieRating); },
                 cy: function(d) { return y(+d.movieMetascore); },
                 r: 8,
                 id: function(d) { return d.movieTitle; }
             })
-            .style("fill", function(d) { return color(d.region); });
+            .style("fill", function(d) { return color1(d.region); });
 
     // what to do when we mouse over a bubble
     var mouseOn = function() {
@@ -141,7 +141,7 @@ d3.csv("peopleversuscritic.csv", function(data) {
     people.append("g")
         .attr("class", "x axis")
         .attr("transform", "translate(" + margin.l + "," + (h - 60 + margin.t) + ")")
-        .call(xAxis);
+        .call(xAxis1);
 
     people.append("g")
         .attr("class", "y axis")
@@ -151,7 +151,7 @@ d3.csv("peopleversuscritic.csv", function(data) {
     people.append("text")
         .attr("class", "x label")
         .attr("text-anchor", "end")
-        .attr("x", w + 50)
+        .attr("x", w1 + 50)
         .attr("y", h - margin.t - 5)
         .text("nota popular");
 

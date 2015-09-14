@@ -10,7 +10,7 @@ var margin = {t:30, r:20, b:20, l:40 },
     x = d3.scale.linear().range([0, w]),
     y = d3.scale.linear().range([h - 60, 0]),
 //colors that will reflect geographical regions
-    color = d3.scale.category10();
+    color2 = d3.scale.category10();
 
 var bestmovie = d3.select("#bestmovie").append("svg")
     .attr("width", w + margin.l + margin.r)
@@ -63,7 +63,7 @@ d3.csv("bestmovie.csv", function(data) {
                 r: 8,
                 id: function(d) { return d.movieTitle; }
             })
-            .style("fill", function(d) { return color(d.Type); });
+            .style("fill", function(d) { return color2(d.Type); });
 
     // what to do when we mouse over a bubble
     var mouseOn = function() {
@@ -76,7 +76,7 @@ d3.csv("bestmovie.csv", function(data) {
 
         // append lines to bubbles that will be used to show the precise data points.
         // translate their location based on margins
-        svg.append("g")
+        bestmovie.append("g")
             .attr("class", "guide")
             .append("line")
             .attr("x1", circle.attr("cx"))
@@ -88,7 +88,7 @@ d3.csv("bestmovie.csv", function(data) {
             .transition().delay(200).duration(400).styleTween("opacity",
             function() { return d3.interpolate(0, .5); })
 
-        svg.append("g")
+        bestmovie.append("g")
             .attr("class", "guide")
             .append("line")
             .attr("x1", +circle.attr("cx") - 16)
@@ -148,7 +148,7 @@ d3.csv("bestmovie.csv", function(data) {
             width: 25,
             height: 12
         })
-        .style("fill", function(d) { return color(d); });
+        .style("fill", function(d) { return color2(d); });
 
 
     // legend labels

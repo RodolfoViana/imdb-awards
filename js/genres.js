@@ -72,7 +72,7 @@ d3.csv("top250IMDB.csv", function(data) {
 
         // append lines to bubbles that will be used to show the precise data points.
         // translate their location based on margins
-        svg.append("g")
+        genres.append("g")
             .attr("class", "guide")
             .append("line")
             .attr("x1", circle.attr("cx"))
@@ -84,7 +84,7 @@ d3.csv("top250IMDB.csv", function(data) {
             .transition().delay(200).duration(400).styleTween("opacity",
             function() { return d3.interpolate(0, .5); })
 
-        svg.append("g")
+        genres.append("g")
             .attr("class", "guide")
             .append("line")
             .attr("x1", +circle.attr("cx") - 16)
