@@ -4,14 +4,15 @@
 
 // set the stage
 var margin = {t:30, r:20, b:20, l:40 },
-    w = 600 - margin.l - margin.r,
+    w = 900 - margin.l - margin.r,
     h = 500 - margin.t - margin.b,
     x = d3.scale.linear().range([0, w]),
     y = d3.scale.linear().range([h - 60, 0]),
+
 //colors that will reflect geographical regions
     color = d3.scale.category10();
 
-var svg = d3.select("#chart").append("svg")
+var people = d3.select("#chart").append("svg")
     .attr("width", w + margin.l + margin.r)
     .attr("height", h + margin.t + margin.b);
 
@@ -30,11 +31,12 @@ var yAxis = d3.svg.axis()
     .tickSize(6, 3, 0)
     .orient("left");
 
+
 // group that will contain all of the plots
-var groups = svg.append("g").attr("transform", "translate(" + margin.l + "," + margin.t + ")");
+var groups = people.append("g").attr("transform", "translate(" + margin.l + "," + margin.t + ")");
 
 // array of the regions, used for the legend
-var regions = ["Asia", "Europe", "Middle East", "N. America", "S. America", "Sub-Saharan Africa"]
+var regions = ["Asia", "Europe", "Middle East", "N. America", "S. America", "Sub-Saharan Africa"];
 
 
 // bring in the data, and do everything that is data-driven
@@ -43,7 +45,7 @@ d3.csv("peopleversuscritic.csv", function(data) {
     // sort data alphabetically by region, so that the colors match with legend
 
 
-    var x0 = Math.max(-d3.min(data, function(d) { return d.movieRating; }), d3.max(data, function(d) { return d.movieRating; }));
+    var x2 = Math.max(-d3.min(data, function(d) { return d.movieRating; }), d3.max(data, function(d) { return d.movieRating; }));
     x.domain([4, 10]);
     y.domain([4, 10])
 
@@ -72,7 +74,7 @@ d3.csv("peopleversuscritic.csv", function(data) {
 
         // append lines to bubbles that will be used to show the precise data points.
         // translate their location based on margins
-        svg.append("g")
+        people.append("g")
             .attr("class", "guide")
             .append("line")
             .attr("x1", circle.attr("cx"))
@@ -84,7 +86,7 @@ d3.csv("peopleversuscritic.csv", function(data) {
             .transition().delay(200).duration(400).styleTween("opacity",
             function() { return d3.interpolate(0, .5); })
 
-        svg.append("g")
+        people.append("g")
             .attr("class", "guide")
             .append("line")
             .attr("x1", +circle.attr("cx") - 16)
@@ -136,24 +138,24 @@ d3.csv("peopleversuscritic.csv", function(data) {
 
 
     // draw axes and axis labels
-    svg.append("g")
+    people.append("g")
         .attr("class", "x axis")
         .attr("transform", "translate(" + margin.l + "," + (h - 60 + margin.t) + ")")
         .call(xAxis);
 
-    svg.append("g")
+    people.append("g")
         .attr("class", "y axis")
         .attr("transform", "translate(" + margin.l + "," + margin.t + ")")
         .call(yAxis);
 
-    svg.append("text")
+    people.append("text")
         .attr("class", "x label")
         .attr("text-anchor", "end")
         .attr("x", w + 50)
         .attr("y", h - margin.t - 5)
         .text("nota popular");
 
-    svg.append("text")
+    people.append("text")
         .attr("class", "y label")
         .attr("text-anchor", "end")
         .attr("x", -20)

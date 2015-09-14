@@ -11,7 +11,7 @@ var margin = {t:30, r:20, b:20, l:40 },
 //colors that will reflect geographical regions
     color = d3.scale.category10();
 
-var svg = d3.select("#genres").append("svg")
+var genres = d3.select("#genres").append("svg")
     .attr("width", w + margin.l + margin.r)
     .attr("height", h + margin.t + margin.b);
 
@@ -31,10 +31,10 @@ var yAxis = d3.svg.axis()
     .orient("left");
 
 // group that will contain all of the plots
-var groups = svg.append("g").attr("transform", "translate(" + margin.l + "," + margin.t + ")");
+var groups1 = genres.append("g").attr("transform", "translate(" + margin.l + "," + margin.t + ")");
 
 // array of the regions, used for the legend
-var regions = ["Action", "Comedy", "Drama", "Others"]
+var regions1 = ["Action", "Comedy", "Drama", "Others"]
 
 
 // bring in the data, and do everything that is data-driven
@@ -49,7 +49,7 @@ d3.csv("top250IMDB.csv", function(data) {
 
     // style the circles, set their locations based on data
     var circles =
-        groups.selectAll("circle")
+        groups1.selectAll("circle")
             .data(data)
             .enter().append("circle")
             .attr("class", "circles")
@@ -135,8 +135,8 @@ d3.csv("top250IMDB.csv", function(data) {
     $(".circles").tipsy({ gravity: 's', });
 
     // the legend color guide
-    var legend = svg.selectAll("rect")
-        .data(regions)
+    var legend = genres.selectAll("rect")
+        .data(regions1)
         .enter().append("rect")
         .attr({
             x: function(d, i) { return (40 + i*80); },
@@ -148,8 +148,8 @@ d3.csv("top250IMDB.csv", function(data) {
 
 
     // legend labels
-    svg.selectAll("text")
-        .data(regions)
+    genres.selectAll("text")
+        .data(regions1)
         .enter().append("text")
         .attr({
             x: function(d, i) { return (40 + i*80); },
@@ -158,12 +158,12 @@ d3.csv("top250IMDB.csv", function(data) {
         .text(function(d) { return d; });
 
     // draw axes and axis labels
-    svg.append("g")
+    genres.append("g")
         .attr("class", "x axis")
         .attr("transform", "translate(" + margin.l + "," + (h - 60 + margin.t) + ")")
         .call(xAxis);
 
-    svg.append("g")
+    genres.append("g")
         .attr("class", "y axis")
         .attr("transform", "translate(" + margin.l + "," + margin.t + ")")
         .call(yAxis);
@@ -175,7 +175,7 @@ d3.csv("top250IMDB.csv", function(data) {
     //        .attr("y", h - margin.t - 5)
     //        .text("nota popular");
 
-    svg.append("text")
+    genres.append("text")
         .attr("class", "y label")
         .attr("text-anchor", "end")
         .attr("x", -20)

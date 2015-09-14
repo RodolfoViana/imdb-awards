@@ -29,4 +29,6 @@ body { font: 12px sans-serif; }
 #genres {
     text-align: center;
 }
-
+#bestmovie {
+    text-align: center;
+}
