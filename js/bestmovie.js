@@ -35,7 +35,7 @@ var yAxis = d3.svg.axis()
 var groups2 = bestmovie.append("g").attr("transform", "translate(" + margin.l + "," + margin.t + ")");
 
 // array of the regions, used for the legend
-var regions2 = ["best rating", "winner"]
+var regions2 = ["Best Rating", "Winner"]
 
 
 // bring in the data, and do everything that is data-driven

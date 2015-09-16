@@ -153,7 +153,7 @@ d3.csv("peopleversuscritic.csv", function(data) {
         .attr("text-anchor", "end")
         .attr("x", w1 + 50)
         .attr("y", h - margin.t - 5)
-        .text("nota popular");
+        .text("rating of public");
 
     people.append("text")
         .attr("class", "y label")
@@ -162,6 +162,6 @@ d3.csv("peopleversuscritic.csv", function(data) {
         .attr("y", 45)
         .attr("dy", ".75em")
         .attr("transform", "rotate(-90)")
-        .text("nota dos criticos");
+        .text("rating of critics");
 });
 
